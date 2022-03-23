@@ -1,0 +1,24 @@
+{
+  "name": "remindee",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install",
+    "pre-commit": "cd remindee-app && npx lint-staged && npm run lint && git add -A ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/farhanakbar8/remindee.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/farhanakbar8/remindee/issues"
+  },
+  "homepage": "https://github.com/farhanakbar8/remindee#readme",
+  "devDependencies": {
+    "husky": "^7.0.0"
+  }
+}
