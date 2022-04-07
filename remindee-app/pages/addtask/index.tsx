@@ -1,10 +1,7 @@
 import Link from "next/link";
 import { HiArrowNarrowLeft } from "react-icons/hi";
-import React, { useState } from "react";
 
 const addReminder = () => {
-  const [isClicked, setIsClicked] = useState(false);
-
   return (
     <div className='container w-[480px] mx-auto flex justify-center bg-[#F8FAFE] min-h-screen'>
       <div className='w-full px-5 font-[T-Regular]'>
@@ -15,7 +12,7 @@ const addReminder = () => {
               <HiArrowNarrowLeft></HiArrowNarrowLeft>
             </button>
           </Link>
-          <p className='select-none text-xl'>Reminder</p>
+          <p className='select-none text-xl'>Task</p>
           <button className='opacity-0 text-[0.1px]'>
             <HiArrowNarrowLeft></HiArrowNarrowLeft>
           </button>
@@ -27,13 +24,6 @@ const addReminder = () => {
             <label htmlFor=''>Title</label>
             <input
               type='text'
-              name=''
-              id=''
-              className='px-1 text-sm h-[30px]'
-            />
-            <label htmlFor=''>Date</label>
-            <input
-              type='date'
               name=''
               id=''
               className='px-1 text-sm h-[30px]'
@@ -57,20 +47,6 @@ const addReminder = () => {
                 max='60'
                 className='w-[82px] h-[82px] rounded-lg text-5xl text-[#007FFF] focus:bg-[#007FFF] focus:text-white text-center focus:outline-none'
               />
-              <div className='flex flex-col'>
-                <button
-                  id='AM'
-                  className='w-[48px] h-[30px] bg-white rounded-t-lg text-[#007FFF] active:bg-[#007FFF] active:text-white hover:bg-[#007FFF] hover:text-white'
-                >
-                  AM
-                </button>
-                <button
-                  id='PM'
-                  className='w-[48px] h-[30px] bg-white rounded-b-lg text-[#007FFF] focus:bg-[#007FFF] focus:text-white hover:bg-[#007FFF] hover:text-white'
-                >
-                  PM
-                </button>
-              </div>
             </div>
             <label htmlFor=''>Description</label>
             <input

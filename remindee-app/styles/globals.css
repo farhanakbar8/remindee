@@ -46,3 +46,13 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
+.slide-close {
+  transform: translate(-50rem);
+  transition-duration: 2s;
+}
+
+.slide-open {
+  transform: translate(0rem);
+  transition-duration: 2s;
+}

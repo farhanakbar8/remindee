@@ -6,7 +6,7 @@ const signupPage = () => {
     <div className='container w-[480px] mx-auto flex justify-center'>
       <div className='w-full px-5 font-[T-Regular]'>
         {/* Header - Navbar */}
-        <div className='flex justify-between justify-items-center pt-10'>
+        <div className='flex justify-between items-center pt-10'>
           <Link href={"login"}>
             <button className='text-2xl'>
               <HiArrowNarrowLeft></HiArrowNarrowLeft>
