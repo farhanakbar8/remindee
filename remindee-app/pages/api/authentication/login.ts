@@ -2,10 +2,8 @@ import { User } from "@prisma/client";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from "../../../client/prisma";
 import { errorHandler } from "../../../helper/errorHandler";
-import validateEmail from "../../../helper/validateEmail";
 import bcrypt from "bcrypt";
 import { genericException, genericResponse } from "../../../helper/response";
-import Email from "next-auth/providers/email";
 
 export default async function handler(
   req: NextApiRequest,
@@ -13,28 +11,31 @@ export default async function handler(
 ) {
   switch (req.method) {
     case "POST": {
-      const {email,password} = req.body;
+      const { email, password } = req.body;
       try {
-        const user: User | null = await prisma.user.findFirst({where:{ email: email},});
+        const user: User | null = await prisma.user.findFirst({
+          where: { email: email },
+        });
         if (user?.password) {
-            const validatePass = await bcrypt.compare(password, user.password);
-            if (validatePass){
-                res.send(genericResponse<User | null>(true, 200, user));
-            } else {
-                res
-                .status(401)
-                .json(genericException(false, 401, "Password or Email doesn't exist"));
-            }
-        } else {
+          const validatePass = await bcrypt.compare(password, user.password);
+          if (validatePass) {
+            res.send(genericResponse<User | null>(true, 200, user));
+          } else {
             res
-                .status(401)
-                .json(genericException(false, 401, "User doesn't exist"));
+              .status(401)
+              .json(
+                genericException(false, 401, "Password or Email doesn't exist")
+              );
+          }
+        } else {
+          res
+            .status(401)
+            .json(genericException(false, 401, "User doesn't exist"));
         }
-      } catch(error) {
+      } catch (error) {
         errorHandler(error, req, res);
       }
       break;
-
     }
 
     default:

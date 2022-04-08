@@ -1,7 +1,6 @@
 import { FiCircle } from "react-icons/fi";
 import { HiCheckCircle } from "react-icons/hi";
 import { RiMoreFill } from "react-icons/ri";
-import { BiChevronDown } from "react-icons/bi";
 import React, { useState } from "react";
 
 type TaskFormProps = {

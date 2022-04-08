@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import cx from "classnames";
 
-const profilePage = () => {
+const ProfilePage = () => {
   const [isShow, setIsShow] = useState(false);
 
   return (
@@ -57,4 +57,4 @@ const profilePage = () => {
   );
 };
 
-export default profilePage;
+export default ProfilePage;
