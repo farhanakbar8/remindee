@@ -10,7 +10,6 @@ type TaskFormProps = {
 
 const TaskForm = ({ taskList }: TaskFormProps) => {
   const [isChecked, setIsChecked] = useState(false);
-  const [isClicked, setIsClicked] = useState(false);
 
   return (
     <div className='h-[47px] bg-white rounded-2xl px-5 flex justify-between items-center mb-4'>

@@ -54,5 +54,5 @@ input[type="number"] {
 
 .slide-open {
   transform: translate(0rem);
-  transition-duration: 2s;
+  transition-duration: 1s;
 }

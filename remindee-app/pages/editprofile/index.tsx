@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { HiArrowNarrowLeft } from "react-icons/hi";
 
-const addReminder = () => {
+const editProfile = () => {
   return (
     <div className='container w-[480px] mx-auto flex justify-center bg-[#F8FAFE] min-h-screen'>
       <div className='w-full px-5 font-[T-Regular]'>
@@ -12,17 +12,17 @@ const addReminder = () => {
               <HiArrowNarrowLeft></HiArrowNarrowLeft>
             </button>
           </Link>
-          <p className='select-none text-xl'>Task</p>
+          <p className='select-none text-xl'>Edit Profile</p>
           <div className='opacity-0 text-2xl'>
             <HiArrowNarrowLeft></HiArrowNarrowLeft>
           </div>
         </div>
         {/* Header - Navbar */}
         {/* Reminder Form */}
-        <div className='mt-16 mx-7'>
+        <div className='mt-16 mx-7 font-[T-Regular]'>
           <form action='' className='flex flex-col gap-5'>
             <div className='flex flex-col gap-1'>
-              <label htmlFor=''>Title</label>
+              <label htmlFor=''>First Name</label>
               <input
                 type='text'
                 name=''
@@ -32,30 +32,7 @@ const addReminder = () => {
             </div>
 
             <div className='flex flex-col gap-1'>
-              <label htmlFor=''>Time</label>
-              <div className='flex justify-center items-center gap-4'>
-                <input
-                  type='number'
-                  name=''
-                  id=''
-                  min='0'
-                  max='99'
-                  className='w-[82px] h-[82px] rounded-lg text-5xl text-[#007FFF] focus:bg-[#007FFF] focus:text-white text-center focus:outline-none'
-                />
-                :
-                <input
-                  type='number'
-                  name=''
-                  id=''
-                  min='0'
-                  max='60'
-                  className='w-[82px] h-[82px] rounded-lg text-5xl text-[#007FFF] focus:bg-[#007FFF] focus:text-white text-center focus:outline-none'
-                />
-              </div>
-            </div>
-
-            <div className='flex flex-col gap-1'>
-              <label htmlFor=''>Description</label>
+              <label htmlFor=''>Last Name</label>
               <input
                 type='text'
                 name=''
@@ -64,12 +41,21 @@ const addReminder = () => {
               />
             </div>
 
+            <div className='flex flex-col gap-1'>
+              <label htmlFor=''>Email</label>
+              <input
+                type='email'
+                name=''
+                id=''
+                className='px-1 text-sm h-[30px] rounded-lg focus:outline-[#408CFC]'
+              />
+            </div>
             <div className='flex flex-col justify-center mt-6'>
               <button
                 type='submit'
                 className=' bg-[#408CFC] rounded-3xl text-white py-3 font-[T-Medium] w-[207px] m-auto'
               >
-                Create
+                Save
               </button>
             </div>
           </form>
@@ -80,4 +66,4 @@ const addReminder = () => {
   );
 };
 
-export default addReminder;
+export default editProfile;
