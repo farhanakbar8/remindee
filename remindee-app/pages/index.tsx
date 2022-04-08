@@ -1,11 +1,16 @@
 import { HiMenuAlt4 } from "react-icons/hi";
-import { IoNotifications, IoCloseCircle, IoAddCircle } from "react-icons/io5";
+import {
+  IoNotifications,
+  IoCloseCircle,
+  IoAddCircle,
+  IoExitOutline,
+} from "react-icons/io5";
+import { IoIosArrowBack } from "react-icons/io";
+import { MdModeEditOutline } from "react-icons/md";
 import TaskForm from "../components/TaskForm";
 import ReminderForm from "../components/ReminderForm";
 import React, { useState } from "react";
 import Link from "next/link";
-import { IoIosArrowBack } from "react-icons/io";
-import { IoExitOutline } from "react-icons/io5";
 import Image from "next/image";
 import cx from "classnames";
 
@@ -13,6 +18,7 @@ export default function Home() {
   const [isClicked, setIsClicked] = useState(false);
   const [isShow, setIsShow] = useState(false);
 
+  // Profile Page
   function profilePage() {
     return (
       <div
@@ -53,16 +59,22 @@ export default function Home() {
           </div>
           {/* User Name */}
           {/* User Utility */}
-
-          <button className='flex items-center mt-20 gap-3'>
-            <IoExitOutline className='text-3xl text-[#3D4D7A]' />
-            <p className='text-[#F0F1F0]'>Log Out</p>
-          </button>
+          <div className='flex flex-col gap-5 font-[T-Regular]'>
+            <button className='flex items-center mt-20 gap-3'>
+              <MdModeEditOutline className='text-3xl text-[#3D4D7A]' />
+              <p className='text-[#F0F1F0]'>Edit Profile</p>
+            </button>
+            <button className='flex items-center gap-3'>
+              <IoExitOutline className='text-3xl text-[#3D4D7A]' />
+              <p className='text-[#F0F1F0]'>Log Out</p>
+            </button>
+          </div>
           {/* User Utility */}
         </div>
       </div>
     );
   }
+
   return (
     <div className='container w-[480px] mx-auto flex justify-center overflow-hidden relative'>
       {profilePage()}

@@ -7,9 +7,9 @@ const loginPage = () => {
       <div className='w-full px-5'>
         {/* Header - Navbar */}
         <div className='flex justify-between justify-items-center pt-10'>
-          <button className='opacity-0 text-[0.1px]'>
+          <div className='opacity-0 text-2xl'>
             <HiArrowNarrowRight></HiArrowNarrowRight>
-          </button>
+          </div>
           <p className='select-none text-xl font-[T-Regular]'>Log In</p>
           <Link href={"/"}>
             <button className='text-2xl'>

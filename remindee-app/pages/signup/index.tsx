@@ -13,9 +13,9 @@ const signupPage = () => {
             </button>
           </Link>
           <p className='select-none text-xl'>Sign Up</p>
-          <button className='opacity-0 text-[0.1px]'>
+          <div className='opacity-0 text-2xl'>
             <HiArrowNarrowLeft></HiArrowNarrowLeft>
-          </button>
+          </div>
         </div>
         {/* Header - Navbar */}
         {/* Login Form */}
