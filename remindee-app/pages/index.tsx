@@ -30,7 +30,7 @@ export default function Home() {
           }
         )}
       >
-        <div className='w-full px-5'>
+        <div className='w-full px-10'>
           {/* Header */}
           <div className='flex justify-between justify-items-center pt-10 '>
             <div className='w-[110px] h-[110px] relative border-[3px] border-[#3D4D7A] rounded-full p-1 relative'>
