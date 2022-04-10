@@ -21,6 +21,13 @@ export default async function handler(
       }
       break;
     }
+    case "GET": {
+      const userId = req.body.userId;
+      const reminders: Array<Reminder> = await prisma.reminder.findMany({
+        where: { userId: userId },
+      });
+      res.send(genericResponse<Array<Reminder>>(true, 200, reminders));
+    }
     default:
       res
         .status(404)
