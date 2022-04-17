@@ -15,16 +15,20 @@ const ReminderForm = ({ reminderList, reminderDate }: ReminderFormProps) => {
     return (
       <div
         className={cx(
-          "bg-white rounded-2xl mb-8 relative text-xs flex flex-col items-center",
+          "bg-white rounded-2xl mb-8 relative text-xs flex flex-col items-center gap-3 p-2",
           {
             hidden: !isClicked,
             block: isClicked,
           }
         )}
       >
-        <div>Description</div>
-        <button>Edit</button>
-        <button>Delete</button>
+        <div className='h-[25px] w-full text-center'>Description</div>
+        <button className='hover:bg-[#007FFF] hover:text-white active:bg-[#007FFF] active:text-white w-[60px] h-[25px] rounded-lg text-[#007FFF]'>
+          Edit
+        </button>
+        <button className='hover:bg-[#FF002E] hover:text-white active:bg-[#FF002E] active:text-white w-[60px] h-[25px] rounded-lg text-[#FF002E]'>
+          Delete
+        </button>
       </div>
     );
   }
