@@ -71,10 +71,9 @@ model TaskList {
   userId        String    @map("user_id")
   title         String
   description   String
-  hour          Int?
-  minute        Int?
-  dateTime      DateTime  @default(now())
-  timeExpired   DateTime  
+  date          String
+  time          String
+  timeExpired   DateTime?  
   user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
