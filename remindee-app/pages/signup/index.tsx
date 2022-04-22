@@ -1,7 +1,62 @@
 import Link from "next/link";
 import { HiArrowNarrowLeft } from "react-icons/hi";
+// import { GetServerSideProps } from "next";
+// import {
+//   ClientSafeProvider,
+//   getProviders,
+//   LiteralUnion,
+// } from "next-auth/react";
+// import { BuiltInProviderType } from "next-auth/providers";
+import React, { SyntheticEvent, useState } from "react";
+import api from "../../client/api";
+import { useRouter } from "next/dist/client/router";
 
-const signupPage = () => {
+// type LoginPageProps = {
+//   providers: Record<
+//     LiteralUnion<BuiltInProviderType, string>,
+//     ClientSafeProvider
+//   >;
+// };
+
+// export const getServerSideProps: GetServerSideProps = async () => {
+//   return {
+//     props: {
+//       providers: await getProviders(),
+//     },
+//   };
+// };
+
+const SignupPage = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  // const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
+
+  const handleSubmit = async (event: SyntheticEvent) => {
+    event.preventDefault();
+    try {
+      // setLoading(true);
+      // setError(null);
+      await api.post("/authentication/register", {
+        name: name,
+        email: email,
+        password: password,
+      });
+      router.push("/auth/login");
+    } catch (error: any) {
+      console.log(error.response);
+      if (error.response) {
+        console.log("Email is already taken");
+        // setError("Email is already taken");
+      }
+      // setLoading(false);
+    } finally {
+      // setLoading(false);
+    }
+  };
+
   return (
     <div className='container w-[480px] mx-auto flex justify-center'>
       <div className='w-full px-5 font-[T-Regular]'>
@@ -18,16 +73,18 @@ const signupPage = () => {
           </div>
         </div>
         {/* Header - Navbar */}
-        {/* Login Form */}
+        {/* Register Form */}
         <div className='mt-20'>
-          <form action='' className='flex flex-col'>
+          <form onSubmit={handleSubmit} className='flex flex-col'>
             <label htmlFor='' className='text-sm text-[#9C9AA8]'>
               Your Name
             </label>
             <input
               type='text'
-              name=''
-              id=''
+              name='name'
+              id='user_name'
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               className='border-b-[1.5px] focus:outline-0 mt-3 text-sm font-semibold'
             />
             <label htmlFor='' className='text-sm mt-5 text-[#9C9AA8]'>
@@ -35,17 +92,22 @@ const signupPage = () => {
             </label>
             <input
               type='email'
-              name=''
-              id=''
+              name='email'
+              id='user_email'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className='border-b-[1.5px] focus:outline-0 mt-3 font-semibold text-sm'
             />
             <label htmlFor='' className='text-sm mt-5 text-[#9C9AA8]'>
               Password
             </label>
             <input
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               type='password'
-              name=''
-              id=''
+              name='password'
+              id='user_pass'
               className='border-b-[1.5px] focus:outline-0 mt-3'
             />
             {/* Button */}
@@ -73,4 +135,4 @@ const signupPage = () => {
   );
 };
 
-export default signupPage;
+export default SignupPage;
