@@ -112,12 +112,14 @@ const SignupPage = () => {
             />
             {/* Button */}
             <div className='flex flex-col justify-center mt-20'>
-              <button
-                type='submit'
-                className=' bg-[#408CFC] rounded-3xl text-white py-4 text-lg font-[T-Medium] w-[327px] m-auto'
-              >
-                Sign Up
-              </button>
+              <Link href={"/login"}>
+                <button
+                  type='submit'
+                  className=' bg-[#408CFC] rounded-3xl text-white py-4 text-lg font-[T-Medium] w-[327px] m-auto'
+                >
+                  Sign Up
+                </button>
+              </Link>
             </div>
           </form>
         </div>
