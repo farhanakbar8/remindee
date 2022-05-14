@@ -47,12 +47,14 @@ const loginPage = () => {
             </a> */}
             {/* Button */}
             <div className='flex flex-col justify-center mt-20 font-[T-Medium]'>
-              <button
-                type='submit'
-                className=' bg-[#408CFC] rounded-3xl text-white py-4 text-lg w-[327px] m-auto'
-              >
-                Log In
-              </button>
+              <Link href={"/"}>
+                <button
+                  type='submit'
+                  className=' bg-[#408CFC] rounded-3xl text-white py-4 text-lg w-[327px] m-auto'
+                >
+                  Log In
+                </button>
+              </Link>
               <p className='text-center my-5 text-sm text-[#9C9AA8] font-[T-Regular]'>
                 or with
               </p>
