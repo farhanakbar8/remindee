@@ -39,12 +39,12 @@ const loginPage = () => {
               id=''
               className='border-b-[1.5px] focus:outline-0 mt-3'
             />
-            <a
+            {/* <a
               href=''
               className='flex justify-end text-sm font-[T-Medium] font-medium text-[#9C9AA8] mt-3'
             >
               Forgot your password?
-            </a>
+            </a> */}
             {/* Button */}
             <div className='flex flex-col justify-center mt-20 font-[T-Medium]'>
               <button
