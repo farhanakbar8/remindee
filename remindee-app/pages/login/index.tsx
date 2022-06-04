@@ -1,5 +1,12 @@
+// Import Link, this is same as tag <a></a> or anchor in basic HTML. But Next JS, is using Link
 import Link from "next/link";
+
+// Import Icon from react-icons, react-icons is small library for adding icons to our React Apps
 import { HiArrowNarrowRight } from "react-icons/hi";
+
+/*
+Create function for Remindee Login Page using Next JS and Tailwind framework for layouting
+*/
 
 const loginPage = () => {
   return (
@@ -39,13 +46,8 @@ const loginPage = () => {
               id=''
               className='border-b-[1.5px] focus:outline-0 mt-3'
             />
-            {/* <a
-              href=''
-              className='flex justify-end text-sm font-[T-Medium] font-medium text-[#9C9AA8] mt-3'
-            >
-              Forgot your password?
-            </a> */}
             {/* Button */}
+            {/* There are 2 buttons are created, Log In with personal email or Google personal account */}
             <div className='flex flex-col justify-center mt-20 font-[T-Medium]'>
               <Link href={"/"}>
                 <button
@@ -62,6 +64,7 @@ const loginPage = () => {
                 Google
               </button>
             </div>
+            {/* Button */}
           </form>
         </div>
         {/* Login Form */}
