@@ -18,15 +18,14 @@ export default async function handler(
         });
         if (user?.password) {
           const validatePass = await bcrypt.compare(password, user.password);
-          if (validatePass) {
-            res.send(genericResponse<User | null>(true, 200, user));
-          } else {
+          if (!validatePass) {
             res
               .status(401)
               .json(
-                genericException(false, 401, "Password or Email doesn't exist")
+                genericException(false, 401, "Password or Username is wrong")
               );
           }
+          res.send(genericResponse<User | null>(true, 200, user));
         } else {
           res
             .status(401)
