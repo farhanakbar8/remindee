@@ -35,7 +35,7 @@ export default async function handler(
     }
     case "GET": {
       // Get userId and Reminders values from request body
-      const userId = req.body.userId;
+      const userId = req.query.userId as string;
       // Find Reminder from the DB that has the same userId based on req.body.userId
       const reminders: Array<Reminder> = await prisma.reminder.findMany({
         where: { userId: userId },

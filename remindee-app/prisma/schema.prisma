@@ -70,10 +70,7 @@ model TaskList {
   id            String    @id @default(cuid())
   userId        String    @map("user_id")
   title         String
-  description   String
-  date          String
-  time          String
-  timeExpired   DateTime?  
+  description   String  
   user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
