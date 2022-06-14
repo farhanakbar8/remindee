@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import cx from "classnames";
 
 type TaskFormProps = {
-  taskList: string;
+  taskList: any;
 };
 
 const TaskForm = ({ taskList }: TaskFormProps) => {
@@ -24,7 +24,7 @@ const TaskForm = ({ taskList }: TaskFormProps) => {
         )}
       >
         <div className='h-[25px] w-full text-center'>
-          push sampe ga hardstuck
+          {taskList.description}
         </div>
         <button className='hover:bg-[#007FFF] hover:text-white active:bg-[#007FFF] active:text-white w-[60px] h-[25px] rounded-lg text-[#007FFF]'>
           Edit
@@ -61,7 +61,7 @@ const TaskForm = ({ taskList }: TaskFormProps) => {
               !isChecked ? "font-[T-Regular]" : "font-[T-Regular] line-through"
             }
           >
-            {taskList}
+            {taskList.title}
           </p>
         </div>
         <div className='h-full flex items-center'>

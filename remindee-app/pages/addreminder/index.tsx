@@ -1,7 +1,34 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { SyntheticEvent, useState } from "react";
 import { HiArrowNarrowLeft } from "react-icons/hi";
+import api from "../../client/api";
 
-const addReminder = () => {
+const AddReminder = () => {
+  const [title, setTitle] = useState("");
+  const [date, setDate] = useState("");
+  const [hour, setHour] = useState("");
+  const [min, setMin] = useState("");
+  const [desc, setDesc] = useState("");
+
+  const router = useRouter();
+
+  const handleSubmit = async (event: SyntheticEvent) => {
+    event.preventDefault();
+    try {
+      await api.post("/reminder", {
+        userId: localStorage.getItem("userId"),
+        title: title,
+        description: desc,
+        date: date,
+        time: hour.concat(":", min),
+      });
+      router.push("/");
+    } catch (error: any) {
+      console.log(error.response);
+    }
+  };
+
   return (
     <div className='container w-[480px] mx-auto flex justify-center bg-[#F8FAFE] min-h-screen'>
       <div className='w-full px-5 font-[T-Regular]'>
@@ -20,13 +47,19 @@ const addReminder = () => {
         {/* Header - Navbar */}
         {/* Reminder Form */}
         <div className='mt-16 mx-7'>
-          <form action='' className='flex flex-col gap-5'>
+          <form
+            action=''
+            onSubmit={handleSubmit}
+            className='flex flex-col gap-5'
+          >
             <div className='flex flex-col gap-1'>
               <label htmlFor=''>Title</label>
               <input
                 type='text'
-                name=''
-                id=''
+                name='title'
+                id='title'
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
                 className='px-1 text-sm h-[30px] rounded-lg focus:outline-[#408CFC]'
               />
             </div>
@@ -35,8 +68,10 @@ const addReminder = () => {
               <label htmlFor=''>Date</label>
               <input
                 type='date'
-                name=''
-                id=''
+                name='date'
+                id='date'
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
                 className='px-1 text-sm h-[30px] rounded-lg focus:outline-[#408CFC]'
               />
             </div>
@@ -46,35 +81,27 @@ const addReminder = () => {
               <div className='flex justify-center items-center gap-4'>
                 <input
                   type='number'
-                  name=''
-                  id=''
+                  name='hour'
+                  id='hour'
                   min='0'
-                  max='99'
+                  max='23'
+                  placeholder='H'
+                  value={hour}
+                  onChange={(e) => setHour(e.target.value)}
                   className='w-[82px] h-[82px] rounded-lg text-5xl text-[#007FFF] focus:bg-[#007FFF] focus:text-white text-center focus:outline-none'
                 />
                 :
                 <input
                   type='number'
-                  name=''
-                  id=''
+                  name='minute'
+                  id='minute'
                   min='0'
-                  max='60'
+                  max='59'
+                  placeholder='M'
+                  value={min}
+                  onChange={(e) => setMin(e.target.value)}
                   className='w-[82px] h-[82px] rounded-lg text-5xl text-[#007FFF] focus:bg-[#007FFF] focus:text-white text-center focus:outline-none'
                 />
-                <div className='flex flex-col'>
-                  <button
-                    id='AM'
-                    className='w-[48px] h-[30px] bg-white rounded-t-lg text-[#007FFF] active:bg-[#007FFF] active:text-white hover:bg-[#007FFF] hover:text-white'
-                  >
-                    AM
-                  </button>
-                  <button
-                    id='PM'
-                    className='w-[48px] h-[30px] bg-white rounded-b-lg text-[#007FFF] focus:bg-[#007FFF] focus:text-white hover:bg-[#007FFF] hover:text-white'
-                  >
-                    PM
-                  </button>
-                </div>
               </div>
             </div>
 
@@ -82,8 +109,10 @@ const addReminder = () => {
               <label htmlFor=''>Description</label>
               <input
                 type='text'
-                name=''
-                id=''
+                name='desc'
+                id='desc'
+                value={desc}
+                onChange={(e) => setDesc(e.target.value)}
                 className='px-1 text-sm h-[30px] rounded-lg focus:outline-[#408CFC]'
               />
             </div>
@@ -104,4 +133,4 @@ const addReminder = () => {
   );
 };
 
-export default addReminder;
+export default AddReminder;

@@ -1,7 +1,30 @@
 import Link from "next/link";
 import { HiArrowNarrowLeft } from "react-icons/hi";
 
-const addReminder = () => {
+import { useRouter } from "next/router";
+import { SyntheticEvent, useState } from "react";
+import api from "../../client/api";
+
+const AddTask = () => {
+  const [title, setTitle] = useState("");
+  const [desc, setDesc] = useState("");
+
+  const router = useRouter();
+
+  const handleSubmit = async (event: SyntheticEvent) => {
+    event.preventDefault();
+    try {
+      await api.post("/task", {
+        userId: localStorage.getItem("userId"),
+        title: title,
+        description: desc,
+      });
+      router.push("/");
+    } catch (error: any) {
+      console.log(error.response);
+    }
+  };
+
   return (
     <div className='container w-[480px] mx-auto flex justify-center bg-[#F8FAFE] min-h-screen'>
       <div className='w-full px-5 font-[T-Regular]'>
@@ -18,49 +41,33 @@ const addReminder = () => {
           </div>
         </div>
         {/* Header - Navbar */}
-        {/* Reminder Form */}
+        {/* Task Form */}
         <div className='mt-16 mx-7'>
-          <form action='' className='flex flex-col gap-5'>
+          <form
+            action=''
+            onSubmit={handleSubmit}
+            className='flex flex-col gap-5'
+          >
             <div className='flex flex-col gap-1'>
               <label htmlFor=''>Title</label>
               <input
                 type='text'
-                name=''
-                id=''
+                name='title'
+                id='title'
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
                 className='px-1 text-sm h-[30px] rounded-lg focus:outline-[#408CFC]'
               />
             </div>
 
             <div className='flex flex-col gap-1'>
-              <label htmlFor=''>Time</label>
-              <div className='flex justify-center items-center gap-4'>
-                <input
-                  type='number'
-                  name=''
-                  id=''
-                  min='0'
-                  max='99'
-                  className='w-[82px] h-[82px] rounded-lg text-5xl text-[#007FFF] focus:bg-[#007FFF] focus:text-white text-center focus:outline-none'
-                />
-                :
-                <input
-                  type='number'
-                  name=''
-                  id=''
-                  min='0'
-                  max='60'
-                  className='w-[82px] h-[82px] rounded-lg text-5xl text-[#007FFF] focus:bg-[#007FFF] focus:text-white text-center focus:outline-none'
-                />
-              </div>
-            </div>
-
-            <div className='flex flex-col gap-1'>
               <label htmlFor=''>Description</label>
-              <input
-                type='text'
-                name=''
-                id=''
-                className='px-1 text-sm h-[30px] rounded-lg focus:outline-[#408CFC]'
+              <textarea
+                name='desc'
+                id='desc'
+                value={desc}
+                onChange={(e) => setDesc(e.target.value)}
+                className='p-1 h-[90px] text-sm col rounded-lg focus:outline-[#408CFC]'
               />
             </div>
 
@@ -74,10 +81,10 @@ const addReminder = () => {
             </div>
           </form>
         </div>
-        {/* Reminder Form */}
+        {/* Task Form */}
       </div>
     </div>
   );
 };
 
-export default addReminder;
+export default AddTask;

@@ -4,11 +4,10 @@ import React, { useState } from "react";
 import cx from "classnames";
 
 type ReminderFormProps = {
-  reminderList: string;
-  reminderDate: string;
+  reminder: any;
 };
 
-const ReminderForm = ({ reminderList, reminderDate }: ReminderFormProps) => {
+const ReminderForm = ({ reminder }: ReminderFormProps) => {
   const [isClicked, setIsClicked] = useState(false);
 
   function dropDownBox() {
@@ -22,7 +21,9 @@ const ReminderForm = ({ reminderList, reminderDate }: ReminderFormProps) => {
           }
         )}
       >
-        <div className='h-[25px] w-full text-center'>Description</div>
+        <div className='h-[25px] w-full text-center'>
+          {reminder.description}
+        </div>
         <button className='hover:bg-[#007FFF] hover:text-white active:bg-[#007FFF] active:text-white w-[60px] h-[25px] rounded-lg text-[#007FFF]'>
           Edit
         </button>
@@ -46,8 +47,8 @@ const ReminderForm = ({ reminderList, reminderDate }: ReminderFormProps) => {
             <BsCalendar2Week className='text-xl text-[#BB1FC2]'></BsCalendar2Week>
           </button>
           <div className='font-[T-Regular]'>
-            <p>{reminderList}</p>
-            <p className='text-xs text-[#777777] font-light'>{reminderDate}</p>
+            <p>{reminder.title}</p>
+            <p className='text-xs text-[#777777] font-light'>{reminder.date}</p>
           </div>
         </div>
         <div className='h-full flex items-center'>
