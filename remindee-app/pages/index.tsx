@@ -85,6 +85,14 @@ export default function Home() {
     );
   }
 
+  function addCircleClicked() {
+    return !isClicked ? (
+      <IoAddCircle className='text-5xl text-[#007FFF] active:animate-spin my-9'></IoAddCircle>
+    ) : (
+      <IoCloseCircle className='text-5xl text-[#FF002E] active:animate-spin'></IoCloseCircle>
+    );
+  }
+
   return (
     <div className='container w-[480px] mx-auto flex justify-center overflow-hidden relative'>
       {profilePage()}
@@ -167,11 +175,7 @@ export default function Home() {
               setIsClicked(!isClicked);
             }}
           >
-            {!isClicked ? (
-              <IoAddCircle className='text-5xl text-[#007FFF] active:animate-spin my-9'></IoAddCircle>
-            ) : (
-              <IoCloseCircle className='text-5xl text-[#FF002E] active:animate-spin'></IoCloseCircle>
-            )}
+            {addCircleClicked()}
           </button>
         </div>
       </div>
