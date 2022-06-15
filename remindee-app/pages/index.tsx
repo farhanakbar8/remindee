@@ -1,7 +1,7 @@
 import { HiMenuAlt4 } from "react-icons/hi";
 import { IoCloseCircle, IoAddCircle, IoExitOutline } from "react-icons/io5";
 import { IoIosArrowBack } from "react-icons/io";
-import { MdModeEditOutline } from "react-icons/md";
+import { HiOutlineLogout } from "react-icons/hi";
 import TaskForm from "../components/TaskForm";
 import ReminderForm from "../components/ReminderForm";
 import React, { useEffect, useState } from "react";
@@ -9,12 +9,16 @@ import Link from "next/link";
 import Image from "next/image";
 import cx from "classnames";
 import api from "../client/api";
+import classNames from "classnames";
 
 export default function Home() {
   const [isClicked, setIsClicked] = useState(false);
   const [isShow, setIsShow] = useState(false);
   const [task, setTask] = useState(null);
   const [reminder, setReminder] = useState(null);
+  const [isHovering, setIsHovered] = useState(false);
+  const onMouseEnter = () => setIsHovered(true);
+  const onMouseLeave = () => setIsHovered(false);
   useEffect(() => {
     if ("userId" in localStorage) {
       const userId = localStorage.getItem("userId");
@@ -28,12 +32,13 @@ export default function Home() {
   }, []);
   console.log(task);
   console.log(reminder);
+
   // Profile Page
   function profilePage() {
     return (
       <div
         className={cx(
-          "container w-[480px] min-h-full mx-auto flex justify-center bg-[#0D1F51] absolute",
+          "container w-[480px] min-h-screen mx-auto flex justify-center bg-[#0D1F51] absolute",
           {
             "slide-open": isShow,
             "slide-close": !isShow,
@@ -42,16 +47,7 @@ export default function Home() {
       >
         <div className='w-full px-10'>
           {/* Header */}
-          <div className='flex justify-between justify-items-center pt-10 '>
-            <div className='w-[110px] h-[110px] relative border-[3px] border-[#3D4D7A] rounded-full p-1 relative'>
-              <Image
-                src={"/image/simp.jpg"}
-                width={120}
-                height={120}
-                alt='Fill User'
-                className='rounded-full'
-              ></Image>
-            </div>
+          <div className='flex justify-end justify-items-center pt-10 '>
             <button
               onClick={() => {
                 setIsShow(false);
@@ -63,21 +59,43 @@ export default function Home() {
           </div>
           {/* Header */}
           {/* User Name */}
-          <div className='mt-16 text-white font-[T-Medium] font-bold text-4xl flex flex-col gap-4'>
-            <p>Baila</p>
-            <p>Fauri</p>
+          <div className='mt-16 text-white font-[T-Medium] font-bold flex items-center gap-4'>
+            <div className='w-[105px] h-[105px] relative border-[3px] border-[#3D4D7A] rounded-full p-1 relative'>
+              <Image
+                src={"/image/simp.jpg"}
+                width={120}
+                height={120}
+                alt='Fill User'
+                className='rounded-full'
+              ></Image>
+            </div>
+            <div className='flex flex-col text-2xl'>
+              <p>First</p>
+              <p>Middle</p>
+              <p>Last</p>
+            </div>
           </div>
           {/* User Name */}
           {/* User Utility */}
-          <div className='flex flex-col gap-5 font-[T-Regular]'>
-            <button className='flex items-center mt-20 gap-3'>
-              <MdModeEditOutline className='text-3xl text-[#3D4D7A]' />
-              <p className='text-[#F0F1F0]'>Edit Profile</p>
+          <div className='flex mt-40 justify-start items-center'>
+            <button onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+              {isHovering ? (
+                <div className='py-1 px-3 flex items-center gap-2 bg-red-500 rounded-xl transition-width duration-100 drop-shadow-lg'>
+                  <HiOutlineLogout className='text-white text-5xl' />
+                  <p className='text-white font-bold font-[T-Medium] transition-opacity opacity-100'>
+                    Logout
+                  </p>
+                </div>
+              ) : (
+                <div className='py-1 px-1 flex items-center gap-2 rounded-xl transition-width duration-200'>
+                  <HiOutlineLogout className='text-red-500 text-5xl' />
+                  <p className='text-red-500 font-bold font-[T-Medium] transition-opacity opacity-0'>
+                    Logout
+                  </p>
+                </div>
+              )}
             </button>
-            <button className='flex items-center gap-3'>
-              <IoExitOutline className='text-3xl text-[#3D4D7A]' />
-              <p className='text-[#F0F1F0]'>Log Out</p>
-            </button>
+            {/* <p>Logout</p> */}
           </div>
           {/* User Utility */}
         </div>
@@ -96,7 +114,7 @@ export default function Home() {
   return (
     <div className='container w-[480px] mx-auto flex justify-center overflow-hidden relative'>
       {profilePage()}
-      <div className='w-full bg-[#F8FAFE] px-5'>
+      <div className='w-full bg-[#F8FAFE] px-5 min-h-screen'>
         {/* Header - Navbar */}
         <div className='flex justify-between justify-items-center pt-10'>
           <button
