@@ -22,7 +22,7 @@ export default async function handler(
       break;
     }
     case "GET": {
-      const userId = req.body.userId;
+      const userId = req.query.userId as string;
       const tasks: Array<TaskList> = await prisma.taskList.findMany({
         where: { userId: userId },
       });

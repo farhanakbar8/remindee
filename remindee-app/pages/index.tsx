@@ -1,23 +1,33 @@
 import { HiMenuAlt4 } from "react-icons/hi";
-import {
-  IoNotifications,
-  IoCloseCircle,
-  IoAddCircle,
-  IoExitOutline,
-} from "react-icons/io5";
+import { IoCloseCircle, IoAddCircle, IoExitOutline } from "react-icons/io5";
 import { IoIosArrowBack } from "react-icons/io";
 import { MdModeEditOutline } from "react-icons/md";
 import TaskForm from "../components/TaskForm";
 import ReminderForm from "../components/ReminderForm";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import cx from "classnames";
+import api from "../client/api";
 
 export default function Home() {
   const [isClicked, setIsClicked] = useState(false);
   const [isShow, setIsShow] = useState(false);
-
+  const [task, setTask] = useState(null);
+  const [reminder, setReminder] = useState(null);
+  useEffect(() => {
+    if ("userId" in localStorage) {
+      const userId = localStorage.getItem("userId");
+      api.get(`/task?userId=${userId}`).then((res) => {
+        setTask(res.data);
+      });
+      api.get(`/reminder?userId=${userId}`).then((res) => {
+        setReminder(res.data);
+      });
+    }
+  }, []);
+  console.log(task);
+  console.log(reminder);
   // Profile Page
   function profilePage() {
     return (
@@ -97,9 +107,6 @@ export default function Home() {
           >
             <HiMenuAlt4></HiMenuAlt4>
           </button>
-          <button className='text-2xl text-[#9CA3BE]'>
-            <IoNotifications></IoNotifications>
-          </button>
         </div>
         {/* Header - Navbar */}
         {/* Logo */}
@@ -114,11 +121,15 @@ export default function Home() {
           </p>
           <div className='mt-5'>
             {/* Form */}
-            <TaskForm taskList='Apex' />
+            {task &&
+              task.map((res) => {
+                return <TaskForm key={res.id} taskList={res} />;
+              })}
+            {/* <TaskForm taskList='Apex' />
             <TaskForm taskList='Valo' />
             <TaskForm taskList='Pusreng' />
             <TaskForm taskList='Tidur' />
-            <TaskForm taskList='Makan' />
+            <TaskForm taskList='Makan' /> */}
             {/* Form */}
           </div>
         </div>
@@ -129,10 +140,14 @@ export default function Home() {
             REMINDER
           </p>
           <div className='mt-5'>
-            <ReminderForm
+            {reminder &&
+              reminder.map((res) => {
+                return <ReminderForm key={res.id} reminder={res} />;
+              })}
+            {/* <ReminderForm
               reminderList='Tugas'
               reminderDate='Fri, 18 March 2022'
-            />
+            /> */}
           </div>
         </div>
         {/* Reminder Form */}

@@ -7,8 +7,30 @@ import { HiArrowNarrowRight } from "react-icons/hi";
 /*
 Create function for Remindee Login Page using Next JS and Tailwind framework for layouting
 */
+import { useRouter } from "next/router";
+import { SyntheticEvent, useState } from "react";
+import api from "../../client/api";
 
-const loginPage = () => {
+const LoginPage = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const router = useRouter();
+
+  const handleSubmit = async (event: SyntheticEvent) => {
+    event.preventDefault();
+    try {
+      const response = await api.post("/authentication/login", {
+        email: email,
+        password: password,
+      });
+      localStorage.setItem("userId", response.data.id);
+      router.push("/");
+    } catch (error: any) {
+      console.log(error.response);
+    }
+  };
+
   return (
     <div className='container w-[480px] mx-auto flex justify-center'>
       <div className='w-full px-5'>
@@ -27,42 +49,49 @@ const loginPage = () => {
         {/* Header - Navbar */}
         {/* Login Form */}
         <div className='mt-20 font-[T-Regular]'>
-          <form action='' className='flex flex-col'>
+          <form onSubmit={handleSubmit} className='flex flex-col'>
             <label htmlFor='' className='text-sm text-[#9C9AA8]'>
               Your Email
             </label>
             <input
               type='email'
-              name=''
-              id=''
+              name='email'
+              id='user_email'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className='border-b-[1.5px] focus:outline-0 mt-3'
             />
             <label htmlFor='' className='text-sm mt-5 text-[#9C9AA8]'>
               Password
             </label>
             <input
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               type='password'
-              name=''
-              id=''
+              name='password'
+              id='user_pass'
               className='border-b-[1.5px] focus:outline-0 mt-3'
             />
             {/* Button */}
             {/* There are 2 buttons are created, Log In with personal email or Google personal account */}
             <div className='flex flex-col justify-center mt-20 font-[T-Medium]'>
-              <Link href={"/"}>
-                <button
-                  type='submit'
-                  className=' bg-[#408CFC] rounded-3xl text-white py-4 text-lg w-[327px] m-auto'
-                >
-                  Log In
-                </button>
-              </Link>
+              {/* <Link href={"/"}> */}
+              <button
+                type='submit'
+                className=' bg-[#408CFC] rounded-3xl text-white py-4 text-lg w-[327px] m-auto'
+              >
+                Log In
+              </button>
+              {/* </Link> */}
               <p className='text-center my-5 text-sm text-[#9C9AA8] font-[T-Regular]'>
                 or with
               </p>
-              <button className='bg-[#FF6464] rounded-3xl text-white py-4 text-lg w-[327px] m-auto'>
-                Google
-              </button>
+              <Link href={"/api/auth/signin"}>
+                <button className='bg-[#FF6464] rounded-3xl text-white py-4 text-lg w-[327px] m-auto'>
+                  Google
+                </button>
+              </Link>
             </div>
             {/* Button */}
           </form>
@@ -83,4 +112,4 @@ const loginPage = () => {
   );
 };
 
-export default loginPage;
+export default LoginPage;
