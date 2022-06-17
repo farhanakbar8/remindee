@@ -13,7 +13,7 @@ export default async function handler(
       const id = req.query.id as string;
       const user: User | null = await prisma.user.findUnique({
         where: {
-          email: id,
+          id: id,
         },
       });
       res.json(genericResponse<User | null>(true, 200, user));

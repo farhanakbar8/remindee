@@ -1,24 +1,28 @@
 import { HiMenuAlt4 } from "react-icons/hi";
-import { IoCloseCircle, IoAddCircle, IoExitOutline } from "react-icons/io5";
+import { IoCloseCircle, IoAddCircle } from "react-icons/io5";
 import { IoIosArrowBack } from "react-icons/io";
 import { HiOutlineLogout } from "react-icons/hi";
 import TaskForm from "../components/TaskForm";
 import ReminderForm from "../components/ReminderForm";
-import React, { useEffect, useState } from "react";
+import React, { SyntheticEvent, useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import cx from "classnames";
 import api from "../client/api";
-import classNames from "classnames";
+import { useRouter } from "next/router";
 
 export default function Home() {
   const [isClicked, setIsClicked] = useState(false);
   const [isShow, setIsShow] = useState(false);
   const [task, setTask] = useState(null);
   const [reminder, setReminder] = useState(null);
+  const [profile, setProfile] = useState(null);
+  const [profpic, setProfpic] = useState(null);
   const [isHovering, setIsHovered] = useState(false);
   const onMouseEnter = () => setIsHovered(true);
   const onMouseLeave = () => setIsHovered(false);
+
+  const router = useRouter();
+
   useEffect(() => {
     if ("userId" in localStorage) {
       const userId = localStorage.getItem("userId");
@@ -28,10 +32,23 @@ export default function Home() {
       api.get(`/reminder?userId=${userId}`).then((res) => {
         setReminder(res.data);
       });
+      api.get(`/profile?id=${userId}`).then((res) => {
+        setProfile(res.data["name"]);
+        setProfpic(res.data["image"]);
+      });
     }
   }, []);
-  console.log(task);
-  console.log(reminder);
+
+  const handleLogout = async (event: SyntheticEvent) => {
+    event.preventDefault();
+    localStorage.clear();
+    router.push("/login");
+  };
+
+  var arrName = [];
+  if (profile) {
+    arrName = profile.split(" ");
+  }
 
   // Profile Page
   function profilePage() {
@@ -61,24 +78,38 @@ export default function Home() {
           {/* User Name */}
           <div className='mt-16 text-white font-[T-Medium] font-bold flex items-center gap-4'>
             <div className='w-[105px] h-[105px] relative border-[3px] border-[#3D4D7A] rounded-full p-1 relative'>
-              <Image
-                src={"/image/simp.jpg"}
+              {profpic ? (
+                <img
+                  src={profpic}
+                  width={120}
+                  height={120}
+                  className='rounded-full'
+                />
+              ) : (
+                <img src='' alt='' />
+              )}
+              {/* <img
+                src={profpic}
                 width={120}
                 height={120}
-                alt='Fill User'
                 className='rounded-full'
-              ></Image>
+              ></img> */}
             </div>
             <div className='flex flex-col text-2xl'>
-              <p>First</p>
-              <p>Middle</p>
-              <p>Last</p>
+              {arrName &&
+                arrName.map((name) => {
+                  return <p key={name.id}>{name}</p>;
+                })}
             </div>
           </div>
           {/* User Name */}
           {/* User Utility */}
           <div className='flex mt-40 justify-start items-center'>
-            <button onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+            <button
+              onMouseEnter={onMouseEnter}
+              onMouseLeave={onMouseLeave}
+              onClick={handleLogout}
+            >
               {isHovering ? (
                 <div className='py-1 px-3 flex items-center gap-2 bg-red-500 rounded-xl transition-width duration-100 drop-shadow-lg'>
                   <HiOutlineLogout className='text-white text-5xl' />
