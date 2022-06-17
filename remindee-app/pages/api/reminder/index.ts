@@ -43,6 +43,18 @@ export default async function handler(
       // Send successful response
       res.send(genericResponse<Array<Reminder>>(true, 200, reminders));
     }
+    case "DELETE": {
+      const id = req.query.id as string;
+
+      await prisma.reminder.delete({
+        where: {
+          id: id,
+        },
+      });
+
+      res.status(204).end();
+      break;
+    }
     default:
       // If the method is not "POST" or "GET", send exception "Method Not Allowed"
       res

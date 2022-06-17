@@ -28,6 +28,18 @@ export default async function handler(
       });
       res.send(genericResponse<Array<TaskList>>(true, 200, tasks));
     }
+    case "DELETE": {
+      const id = req.query.id as string;
+
+      await prisma.taskList.delete({
+        where: {
+          id: id,
+        },
+      });
+
+      res.status(204).end();
+      break;
+    }
     default:
       res
         .status(404)

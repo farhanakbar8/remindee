@@ -1,8 +1,10 @@
 import { FiCircle } from "react-icons/fi";
 import { HiCheckCircle } from "react-icons/hi";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import React, { useState } from "react";
+import React, { SyntheticEvent, useState } from "react";
 import cx from "classnames";
+import api from "../../client/api";
+import { useRouter } from "next/router";
 
 type TaskFormProps = {
   taskList: any;
@@ -11,6 +13,18 @@ type TaskFormProps = {
 const TaskForm = ({ taskList }: TaskFormProps) => {
   const [isChecked, setIsChecked] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
+
+  const router = useRouter();
+
+  const handleDelete = async (event: SyntheticEvent) => {
+    event.preventDefault();
+    try {
+      await api.delete(`/task?id=${taskList.id}`);
+      router.reload();
+    } catch (error: any) {
+      console.log(error.response);
+    }
+  };
 
   function dropDownBox() {
     return (
@@ -29,7 +43,10 @@ const TaskForm = ({ taskList }: TaskFormProps) => {
         <button className='hover:bg-[#007FFF] hover:text-white active:bg-[#007FFF] active:text-white w-[60px] h-[25px] rounded-lg text-[#007FFF]'>
           Edit
         </button>
-        <button className='hover:bg-[#FF002E] hover:text-white active:bg-[#FF002E] active:text-white w-[60px] h-[25px] rounded-lg text-[#FF002E]'>
+        <button
+          onClick={handleDelete}
+          className='hover:bg-[#FF002E] hover:text-white active:bg-[#FF002E] active:text-white w-[60px] h-[25px] rounded-lg text-[#FF002E]'
+        >
           Delete
         </button>
       </div>
