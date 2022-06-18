@@ -58,7 +58,7 @@ export default function Home() {
     return (
       <div
         className={cx(
-          "container w-[480px] min-h-screen mx-auto flex justify-center bg-[#0D1F51] absolute",
+          "container w-[480px] min-h-screen mx-auto flex justify-center bg-[#0D1F51] absolute overflow-hidden",
           {
             "slide-open": isShow,
             "slide-close": !isShow,
@@ -162,7 +162,7 @@ export default function Home() {
         </div>
         {/* Header - Navbar */}
         {/* Logo */}
-        <div className='font-[Minimo] text-4xl text-[#007FFF] flex justify-center py-20 select-none'>
+        <div className='font-[Minimo] font-medium text-4xl text-[#007FFF] flex justify-center py-20 select-none'>
           <p>remindee</p>
         </div>
         {/* Logo */}
@@ -177,11 +177,6 @@ export default function Home() {
               task.map((res) => {
                 return <TaskForm key={res.id} taskList={res} />;
               })}
-            {/* <TaskForm taskList='Apex' />
-            <TaskForm taskList='Valo' />
-            <TaskForm taskList='Pusreng' />
-            <TaskForm taskList='Tidur' />
-            <TaskForm taskList='Makan' /> */}
             {/* Form */}
           </div>
         </div>
@@ -196,25 +191,21 @@ export default function Home() {
               reminder.map((res) => {
                 return <ReminderForm key={res.id} reminder={res} />;
               })}
-            {/* <ReminderForm
-              reminderList='Tugas'
-              reminderDate='Fri, 18 March 2022'
-            /> */}
           </div>
         </div>
         {/* Reminder Form */}
         <div className='flex justify-end mt-10 pb-10'>
           {isClicked && (
             <>
-              <div className='flex justify-center items-center font-[T-Regular]'>
+              <div className='flex justify-center items-center font-[T-Regular] transition-transform duration-300'>
                 <div className='flex flex-col gap-5 justify-center items-center'>
                   <Link href={"addtask"}>
-                    <div className='w-[100px] h-[50px] bg-white rounded-t-xl rounded-bl-xl flex justify-center items-center bg-[#007FFF] text-white hover:cursor-pointer'>
+                    <div className='w-[100px] h-[50px] bg-white rounded-t-xl rounded-bl-xl flex justify-center items-center bg-[#007FFF] text-white hover:cursor-pointer transition-all duration-150'>
                       Task
                     </div>
                   </Link>
                   <Link href={"addreminder"}>
-                    <div className='w-[100px] h-[50px] bg-white rounded-b-xl rounded-tl-xl flex justify-center items-center bg-[#007FFF] text-white hover:cursor-pointer'>
+                    <div className='w-[100px] h-[50px] bg-white rounded-b-xl rounded-tl-xl flex justify-center items-center bg-[#007FFF] text-white hover:cursor-pointer transition-all duration-150'>
                       Reminder
                     </div>
                   </Link>

@@ -17,7 +17,7 @@
 
 @font-face {
   font-family: "Minimo";
-  src: url("/public/fonts/Minimo\ Light.otf") format("opentype");
+  src: url("/public/fonts/Minimo\ Light.ttf") format("truetype");
 }
 
 html,
