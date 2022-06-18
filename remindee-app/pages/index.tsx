@@ -37,6 +37,9 @@ export default function Home() {
         setProfpic(res.data["image"]);
       });
     }
+    // else {
+    //   router.push("/login");
+    // }
   }, []);
 
   const handleLogout = async (event: SyntheticEvent) => {

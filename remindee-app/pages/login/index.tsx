@@ -14,31 +14,24 @@ import api from "../../client/api";
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLogin, setIslogin] = useState(false);
+  const [isLogin, setIslogin] = useState(true);
 
   const router = useRouter();
 
   const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
     try {
-      console.log("ga masuk samsek");
       const response = await api.post("/authentication/login", {
         email: email,
         password: password,
       });
-      if (response.status == 401) {
-        setIslogin(true);
-        console.log("masuk sini");
-      } else {
-        console.log("masuk sini");
-        setIslogin(false);
-        localStorage.setItem("userId", response.data.id);
-        router.push("/");
-      }
+      setIslogin(true);
+      localStorage.setItem("userId", response.data.id);
+      router.push("/");
     } catch (error: any) {
       console.log(error.response);
+      setIslogin(false);
     }
-    console.log(isLogin);
   };
 
   return (
@@ -84,7 +77,7 @@ const LoginPage = () => {
               className='border-b-[1.5px] focus:outline-0 mt-3'
             />
 
-            {isLogin ? <h1>Username or Password incorrect</h1> : ""}
+            {isLogin ? "" : <h1>Username or Password incorrect</h1>}
 
             {/* Button */}
             {/* There are 2 buttons are created, Log In with personal email or Google personal account */}
