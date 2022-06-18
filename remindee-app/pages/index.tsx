@@ -162,7 +162,7 @@ export default function Home() {
         </div>
         {/* Header - Navbar */}
         {/* Logo */}
-        <div className='font-[Minimo] font-medium text-4xl text-[#007FFF] flex justify-center py-20 select-none'>
+        <div className='font-[Minimo] font-bold text-4xl text-[#007FFF] flex justify-center py-20 select-none'>
           <p>remindee</p>
         </div>
         {/* Logo */}
