@@ -30,7 +30,7 @@ const TaskForm = ({ taskList }: TaskFormProps) => {
     return (
       <div
         className={cx(
-          "bg-white rounded-2xl mb-8 relative text-xs flex flex-col items-center gap-3 p-2",
+          "bg-white rounded-2xl mb-8 relative text-xs flex flex-col items-center gap-3 p-2 font-[T-Regular]",
           {
             hidden: !isClicked,
             block: isClicked,
