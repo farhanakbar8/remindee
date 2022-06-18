@@ -1,7 +1,9 @@
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { BsCalendar2Week } from "react-icons/bs";
-import React, { useState } from "react";
+import React, { SyntheticEvent, useState } from "react";
 import cx from "classnames";
+import { useRouter } from "next/router";
+import api from "../../client/api";
 
 type ReminderFormProps = {
   reminder: any;
@@ -9,6 +11,18 @@ type ReminderFormProps = {
 
 const ReminderForm = ({ reminder }: ReminderFormProps) => {
   const [isClicked, setIsClicked] = useState(false);
+
+  const router = useRouter();
+
+  const handleDelete = async (event: SyntheticEvent) => {
+    event.preventDefault();
+    try {
+      await api.delete(`/reminder?id=${reminder.id}`);
+      router.reload();
+    } catch (error: any) {
+      console.log(error.response);
+    }
+  };
 
   function dropDownBox() {
     return (
@@ -27,7 +41,10 @@ const ReminderForm = ({ reminder }: ReminderFormProps) => {
         <button className='hover:bg-[#007FFF] hover:text-white active:bg-[#007FFF] active:text-white w-[60px] h-[25px] rounded-lg text-[#007FFF]'>
           Edit
         </button>
-        <button className='hover:bg-[#FF002E] hover:text-white active:bg-[#FF002E] active:text-white w-[60px] h-[25px] rounded-lg text-[#FF002E]'>
+        <button
+          onClick={handleDelete}
+          className='hover:bg-[#FF002E] hover:text-white active:bg-[#FF002E] active:text-white w-[60px] h-[25px] rounded-lg text-[#FF002E]'
+        >
           Delete
         </button>
       </div>

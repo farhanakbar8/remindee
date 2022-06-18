@@ -14,6 +14,7 @@ import api from "../../client/api";
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLogin, setIslogin] = useState(true);
 
   const router = useRouter();
 
@@ -24,10 +25,12 @@ const LoginPage = () => {
         email: email,
         password: password,
       });
+      setIslogin(true);
       localStorage.setItem("userId", response.data.id);
       router.push("/");
     } catch (error: any) {
       console.log(error.response);
+      setIslogin(false);
     }
   };
 
@@ -73,6 +76,9 @@ const LoginPage = () => {
               id='user_pass'
               className='border-b-[1.5px] focus:outline-0 mt-3'
             />
+
+            {isLogin ? "" : <h1>Username or Password incorrect</h1>}
+
             {/* Button */}
             {/* There are 2 buttons are created, Log In with personal email or Google personal account */}
             <div className='flex flex-col justify-center mt-20 font-[T-Medium]'>
