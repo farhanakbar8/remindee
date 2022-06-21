@@ -26,6 +26,11 @@ const TaskForm = ({ taskList }: TaskFormProps) => {
     }
   };
 
+  const handleEdit = async (event: SyntheticEvent) => {
+    event.preventDefault();
+    router.push(`/${taskList.id}/editTask`);
+  };
+
   function dropDownBox() {
     return (
       <div
@@ -40,7 +45,10 @@ const TaskForm = ({ taskList }: TaskFormProps) => {
         <div className='h-[25px] w-full text-center'>
           {taskList.description}
         </div>
-        <button className='hover:bg-[#007FFF] hover:text-white active:bg-[#007FFF] active:text-white w-[60px] h-[25px] rounded-lg text-[#007FFF]'>
+        <button
+          onClick={handleEdit}
+          className='hover:bg-[#007FFF] hover:text-white active:bg-[#007FFF] active:text-white w-[60px] h-[25px] rounded-lg text-[#007FFF]'
+        >
           Edit
         </button>
         <button

@@ -34,14 +34,22 @@ export default async function handler(
       break;
     }
     case "GET": {
-      // Get userId and Reminders values from request body
-      const userId = req.query.userId as string;
-      // Find Reminder from the DB that has the same userId based on req.body.userId
-      const reminders: Array<Reminder> = await prisma.reminder.findMany({
-        where: { userId: userId },
-      });
-      // Send successful response
-      res.send(genericResponse<Array<Reminder>>(true, 200, reminders));
+      if (req.query.userId) {
+        const userId = req.query.userId as string;
+        const reminders: Array<Reminder> = await prisma.reminder.findMany({
+          where: { userId: userId },
+        });
+        res.send(genericResponse<Array<Reminder>>(true, 200, reminders));
+      } else if (req.query.id) {
+        const id = req.query.id as string;
+        const reminder: Reminder = await prisma.reminder.findUnique({
+          where: {
+            id: id,
+          },
+        });
+        res.send(genericResponse<Reminder>(true, 200, reminder));
+      }
+      break;
     }
     case "DELETE": {
       const id = req.query.id as string;
@@ -53,6 +61,24 @@ export default async function handler(
       });
 
       res.status(204).end();
+      break;
+    }
+    case "PUT": {
+      const id = req.query.id as string;
+      const data = req.body;
+      try {
+        const reminder = await prisma.reminder.update({
+          where: {
+            id: id,
+          },
+          data: {
+            ...data,
+          },
+        });
+        res.send(genericResponse<Reminder>(true, 200, reminder));
+      } catch (error) {
+        errorHandler(error, req, res);
+      }
       break;
     }
     default:
