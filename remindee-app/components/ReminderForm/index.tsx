@@ -74,6 +74,7 @@ const ReminderForm = ({ reminder }: ReminderFormProps) => {
           <div className='font-[T-Regular]'>
             <p>{reminder.title}</p>
             <p className='text-xs text-[#777777] font-light'>{reminder.date}</p>
+            <p>{reminder.time}</p>
           </div>
         </div>
         <div className='h-full flex items-center'>
