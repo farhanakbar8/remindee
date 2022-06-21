@@ -22,11 +22,22 @@ export default async function handler(
       break;
     }
     case "GET": {
-      const userId = req.query.userId as string;
-      const tasks: Array<TaskList> = await prisma.taskList.findMany({
-        where: { userId: userId },
-      });
-      res.send(genericResponse<Array<TaskList>>(true, 200, tasks));
+      if (req.query.userId) {
+        const userId = req.query.userId as string;
+        const tasks: Array<TaskList> = await prisma.taskList.findMany({
+          where: { userId: userId },
+        });
+        res.send(genericResponse<Array<TaskList>>(true, 200, tasks));
+      } else if (req.query.id) {
+        const id = req.query.id as string;
+        const task: TaskList = await prisma.taskList.findUnique({
+          where: {
+            id: id,
+          },
+        });
+        res.send(genericResponse<TaskList>(true, 200, task));
+      }
+      break;
     }
     case "DELETE": {
       const id = req.query.id as string;
@@ -38,6 +49,24 @@ export default async function handler(
       });
 
       res.status(204).end();
+      break;
+    }
+    case "PUT": {
+      const id = req.query.id as string;
+      const data = req.body;
+      try {
+        const task = await prisma.taskList.update({
+          where: {
+            id: id,
+          },
+          data: {
+            ...data,
+          },
+        });
+        res.send(genericResponse<TaskList>(true, 200, task));
+      } catch (error) {
+        errorHandler(error, req, res);
+      }
       break;
     }
     default:
