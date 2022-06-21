@@ -53,6 +53,10 @@ export default function Home() {
     arrName = profile.split(" ");
   }
 
+  function isLogin() {
+    return "userId" in localStorage;
+  }
+
   // Profile Page
   function profilePage() {
     return (
@@ -79,59 +83,76 @@ export default function Home() {
           </div>
           {/* Header */}
           {/* User Name */}
-          <div className='mt-16 text-white font-[T-Medium] font-bold flex items-center gap-4'>
-            <div className='w-[105px] h-[105px] relative border-[3px] border-[#3D4D7A] rounded-full p-1 relative'>
-              {profpic ? (
-                <img
-                  src={profpic}
-                  width={120}
-                  height={120}
-                  className='rounded-full'
-                />
-              ) : (
-                <img src='' alt='' />
-              )}
-              {/* <img
-                src={profpic}
-                width={120}
-                height={120}
-                className='rounded-full'
-              ></img> */}
+          {!isLogin ? (
+            <div className='mt-16 text-white font-[T-Medium] font-bold flex items-center gap-4'>
+              <div className='w-[105px] h-[105px] relative border-[3px] border-[#3D4D7A] rounded-full p-1 relative'>
+                {profpic ? (
+                  <img
+                    src={profpic}
+                    width={120}
+                    height={120}
+                    className='rounded-full'
+                  />
+                ) : (
+                  <img src='' alt='' />
+                )}
+              </div>
+              <div className='flex flex-col text-2xl'>
+                {arrName &&
+                  arrName.map((name) => {
+                    return <p key={name.id}>{name}</p>;
+                  })}
+              </div>
+              <div className='flex mt-40 justify-start items-center'>
+                <button
+                  onMouseEnter={onMouseEnter}
+                  onMouseLeave={onMouseLeave}
+                  onClick={handleLogout}
+                >
+                  {isHovering ? (
+                    <div className='py-1 px-3 flex items-center gap-2 bg-red-500 rounded-xl transition-width duration-100 drop-shadow-lg'>
+                      <HiOutlineLogout className='text-white text-5xl' />
+                      <p className='text-white font-bold font-[T-Medium] transition-opacity opacity-100'>
+                        Logout
+                      </p>
+                    </div>
+                  ) : (
+                    <div className='py-1 px-1 flex items-center gap-2 rounded-xl transition-width duration-200'>
+                      <HiOutlineLogout className='text-red-500 text-5xl' />
+                      <p className='text-red-500 font-bold font-[T-Medium] transition-opacity opacity-0'>
+                        Logout
+                      </p>
+                    </div>
+                  )}
+                </button>
+              </div>
             </div>
-            <div className='flex flex-col text-2xl'>
-              {arrName &&
-                arrName.map((name) => {
-                  return <p key={name.id}>{name}</p>;
-                })}
+          ) : (
+            <div className='flex mt-96 justify-start items-center'>
+              <button
+                onMouseEnter={onMouseEnter}
+                onMouseLeave={onMouseLeave}
+                onClick={handleLogout}
+              >
+                {isHovering ? (
+                  <div className='py-1 px-3 flex items-center gap-2 bg-green-500 rounded-xl transition-width duration-100 drop-shadow-lg'>
+                    <HiOutlineLogout className='text-white text-5xl' />
+                    <p className='text-white font-bold font-[T-Medium] transition-opacity opacity-100'>
+                      Login
+                    </p>
+                  </div>
+                ) : (
+                  <div className='py-1 px-1 flex items-center gap-2 rounded-xl transition-width duration-200'>
+                    <HiOutlineLogout className='text-green-500 text-5xl' />
+                    <p className='text-green-500 font-bold font-[T-Medium] transition-opacity opacity-0'>
+                      Login
+                    </p>
+                  </div>
+                )}
+              </button>
             </div>
-          </div>
+          )}
           {/* User Name */}
-          {/* User Utility */}
-          <div className='flex mt-40 justify-start items-center'>
-            <button
-              onMouseEnter={onMouseEnter}
-              onMouseLeave={onMouseLeave}
-              onClick={handleLogout}
-            >
-              {isHovering ? (
-                <div className='py-1 px-3 flex items-center gap-2 bg-red-500 rounded-xl transition-width duration-100 drop-shadow-lg'>
-                  <HiOutlineLogout className='text-white text-5xl' />
-                  <p className='text-white font-bold font-[T-Medium] transition-opacity opacity-100'>
-                    Logout
-                  </p>
-                </div>
-              ) : (
-                <div className='py-1 px-1 flex items-center gap-2 rounded-xl transition-width duration-200'>
-                  <HiOutlineLogout className='text-red-500 text-5xl' />
-                  <p className='text-red-500 font-bold font-[T-Medium] transition-opacity opacity-0'>
-                    Logout
-                  </p>
-                </div>
-              )}
-            </button>
-            {/* <p>Logout</p> */}
-          </div>
-          {/* User Utility */}
         </div>
       </div>
     );
