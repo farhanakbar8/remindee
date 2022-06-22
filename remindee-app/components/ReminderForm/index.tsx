@@ -61,12 +61,12 @@ const ReminderForm = ({ reminder }: ReminderFormProps) => {
 
   return (
     <div
-      className={cx("h-[47px] w-[440px] bg-white rounded-2xl px-5 mb-4", {
+      className={cx("h-[77px] w-[440px] bg-white rounded-2xl px-5 mb-4", {
         "h-full": isClicked,
         "h-[47px]": !isClicked,
       })}
     >
-      <div className='flex justify-between items-center h-[47px]'>
+      <div className='flex justify-between items-center h-[77px]'>
         <div className='flex gap-3'>
           <button>
             <BsCalendar2Week className='text-xl text-[#BB1FC2]'></BsCalendar2Week>
@@ -74,7 +74,7 @@ const ReminderForm = ({ reminder }: ReminderFormProps) => {
           <div className='font-[T-Regular]'>
             <p>{reminder.title}</p>
             <p className='text-xs text-[#777777] font-light'>{reminder.date}</p>
-            <p>{reminder.time}</p>
+            <p className='text-sm'>{reminder.time}</p>
           </div>
         </div>
         <div className='h-full flex items-center'>

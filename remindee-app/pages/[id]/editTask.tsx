@@ -14,7 +14,6 @@ const EditTask = () => {
     event.preventDefault();
     try {
       await api.put(`/task?id=${router.query.id}`, {
-        // userId: localStorage.getItem("userId"),
         title: title,
         description: desc,
       });
