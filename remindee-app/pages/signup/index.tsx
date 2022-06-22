@@ -39,12 +39,13 @@ const SignupPage = () => {
     try {
       // setLoading(true);
       // setError(null);
+      console.log("masuk");
       await api.post("/authentication/register", {
         name: name,
         email: email,
         password: password,
       });
-      router.push("/auth/login");
+      router.push("/login");
     } catch (error: any) {
       console.log(error.response);
       if (error.response) {
@@ -62,11 +63,10 @@ const SignupPage = () => {
       <div className='w-full px-5 font-[T-Regular]'>
         {/* Header - Navbar */}
         <div className='flex justify-between items-center pt-10'>
-          <Link href={"login"}>
-            <button className='text-2xl'>
-              <HiArrowNarrowLeft></HiArrowNarrowLeft>
-            </button>
-          </Link>
+          <button className='text-2xl'>
+            <HiArrowNarrowLeft></HiArrowNarrowLeft>
+          </button>
+
           <p className='select-none text-xl'>Sign Up</p>
           <div className='opacity-0 text-2xl'>
             <HiArrowNarrowLeft></HiArrowNarrowLeft>
@@ -112,14 +112,12 @@ const SignupPage = () => {
             />
             {/* Button */}
             <div className='flex flex-col justify-center mt-20'>
-              <Link href={"/login"}>
-                <button
-                  type='submit'
-                  className=' bg-[#408CFC] rounded-3xl text-white py-4 text-lg font-[T-Medium] w-[327px] m-auto'
-                >
-                  Sign Up
-                </button>
-              </Link>
+              <button
+                type='submit'
+                className=' bg-[#408CFC] rounded-3xl text-white py-4 text-lg font-[T-Medium] w-[327px] m-auto'
+              >
+                Sign Up
+              </button>
             </div>
           </form>
         </div>

@@ -33,13 +33,10 @@ export default function Home() {
         setReminder(res.data);
       });
       api.get(`/profile?id=${userId}`).then((res) => {
-        setProfile(res.data["name"]);
-        setProfpic(res.data["image"]);
+        setProfile(res?.data["name"]);
+        setProfpic(res?.data["image"]);
       });
     }
-    // else {
-    //   router.push("/login");
-    // }
   }, []);
 
   const handleLogout = async (event: SyntheticEvent) => {
