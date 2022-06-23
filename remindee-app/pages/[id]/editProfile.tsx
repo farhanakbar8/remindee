@@ -54,10 +54,12 @@ const EditProfile = () => {
             <div className='flex flex-col gap-1'>
               <label htmlFor=''>Name</label>
               <input
+                required
                 type='text'
                 name='name'
                 id='name'
                 value={name}
+                maxLength={25}
                 onChange={(e) => setName(e.target.value)}
                 className='px-1 text-sm h-[30px] rounded-lg focus:outline-[#408CFC]'
               />
