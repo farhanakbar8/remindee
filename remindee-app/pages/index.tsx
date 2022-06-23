@@ -220,61 +220,65 @@ export default function Home() {
           <p>remindee</p>
         </div>
         {/* Logo */}
-        {/* Task Form */}
-        <div>
-          <p className='tracking-wider text-[#9CA3BE] font-[T-Regular] font-medium'>
-            TASK
-          </p>
-          <div className='mt-5'>
-            {/* Form */}
-            {task &&
-              task.map((res) => {
-                return <TaskForm key={res.id} taskList={res} />;
-              })}
-            {/* Form */}
-          </div>
-        </div>
-        {/* Task Form */}
-        {/* Reminder Form */}
-        <div className='mt-16'>
-          <p className='tracking-wider text-[#9CA3BE] font-[T-Regular] font-medium'>
-            REMINDER
-          </p>
-          <div className='mt-5'>
-            {reminder &&
-              reminder.map((res) => {
-                return <ReminderForm key={res.id} reminder={res} />;
-              })}
-          </div>
-        </div>
-        {/* Reminder Form */}
-        <div className='flex justify-end mt-10 pb-10'>
-          {isClicked && (
-            <>
-              <div className='flex justify-center items-center font-[T-Regular] transition-transform duration-300'>
-                <div className='flex flex-col gap-5 justify-center items-center'>
-                  <Link href={"addtask"}>
-                    <div className='w-[100px] h-[50px] bg-white rounded-t-xl rounded-bl-xl flex justify-center items-center bg-[#007FFF] text-white hover:cursor-pointer transition-all duration-150'>
-                      Task
-                    </div>
-                  </Link>
-                  <Link href={"addreminder"}>
-                    <div className='w-[100px] h-[50px] bg-white rounded-b-xl rounded-tl-xl flex justify-center items-center bg-[#007FFF] text-white hover:cursor-pointer transition-all duration-150'>
-                      Reminder
-                    </div>
-                  </Link>
-                </div>
+        {isLogin ? (
+          <div>
+            <div>
+              <p className='tracking-wider text-[#9CA3BE] font-[T-Regular] font-medium'>
+                TASK
+              </p>
+              <div className='mt-5'>
+                {/* Form */}
+                {task &&
+                  task.map((res) => {
+                    return <TaskForm key={res.id} taskList={res} />;
+                  })}
+                {/* Form */}
               </div>
-            </>
-          )}
-          <button
-            onClick={() => {
-              setIsClicked(!isClicked);
-            }}
-          >
-            {addCircleClicked()}
-          </button>
-        </div>
+            </div>
+            <div className='mt-16'>
+              <p className='tracking-wider text-[#9CA3BE] font-[T-Regular] font-medium'>
+                REMINDER
+              </p>
+              <div className='mt-5'>
+                {reminder &&
+                  reminder.map((res) => {
+                    return <ReminderForm key={res.id} reminder={res} />;
+                  })}
+              </div>
+            </div>
+            <div className='flex justify-end mt-10 pb-10'>
+              {isClicked && (
+                <>
+                  <div className='flex justify-center items-center font-[T-Regular] transition-transform duration-300'>
+                    <div className='flex flex-col gap-5 justify-center items-center'>
+                      <Link href={"addtask"}>
+                        <div className='w-[100px] h-[50px] bg-white rounded-t-xl rounded-bl-xl flex justify-center items-center bg-[#007FFF] text-white hover:cursor-pointer transition-all duration-150'>
+                          Task
+                        </div>
+                      </Link>
+                      <Link href={"addreminder"}>
+                        <div className='w-[100px] h-[50px] bg-white rounded-b-xl rounded-tl-xl flex justify-center items-center bg-[#007FFF] text-white hover:cursor-pointer transition-all duration-150'>
+                          Reminder
+                        </div>
+                      </Link>
+                    </div>
+                  </div>
+                </>
+              )}
+              <button
+                onClick={() => {
+                  setIsClicked(!isClicked);
+                }}
+              >
+                {addCircleClicked()}
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className='font-[T-Regular] font-semibold mt-40 text-[#9CA3BE] text-center'>
+            Login first to access all features!
+          </div>
+        )}
       </div>
     </div>
   );
