@@ -51,6 +51,11 @@ export default function Home() {
     router.push("/login");
   };
 
+  const handleProfile = async (event: SyntheticEvent) => {
+    event.preventDefault();
+    router.push(`/${localStorage.getItem("userId")}/editProfile`);
+  };
+
   var arrName = [];
   if (profile) {
     arrName = profile.split(" ");
@@ -112,7 +117,10 @@ export default function Home() {
                   >
                     {isHovering ? (
                       <div className='py-1 px-3 flex items-center gap-2 bg-white rounded-xl transition-width duration-100 drop-shadow-lg'>
-                        <BiUser className='text-slate-400 text-5xl' />
+                        <BiUser
+                          onClick={handleProfile}
+                          className='text-slate-400 text-5xl'
+                        />
                         <p className='text-slate-400 font-bold font-[T-Medium] transition-opacity opacity-100'>
                           Edit Profile
                         </p>
