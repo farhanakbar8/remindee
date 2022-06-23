@@ -51,6 +51,7 @@ const AddTask = () => {
             <div className='flex flex-col gap-1'>
               <label htmlFor=''>Title</label>
               <input
+                required
                 type='text'
                 name='title'
                 id='title'
@@ -63,6 +64,7 @@ const AddTask = () => {
             <div className='flex flex-col gap-1'>
               <label htmlFor=''>Description</label>
               <textarea
+                required
                 name='desc'
                 id='desc'
                 value={desc}
