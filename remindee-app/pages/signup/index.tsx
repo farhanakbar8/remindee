@@ -63,9 +63,11 @@ const SignupPage = () => {
       <div className='w-full px-5 font-[T-Regular]'>
         {/* Header - Navbar */}
         <div className='flex justify-between items-center pt-10'>
-          <button className='text-2xl'>
-            <HiArrowNarrowLeft></HiArrowNarrowLeft>
-          </button>
+          <Link href={"/login"}>
+            <button className='text-2xl'>
+              <HiArrowNarrowLeft></HiArrowNarrowLeft>
+            </button>
+          </Link>
 
           <p className='select-none text-xl'>Sign Up</p>
           <div className='opacity-0 text-2xl'>
