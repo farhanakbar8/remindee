@@ -55,6 +55,7 @@ const AddReminder = () => {
             <div className='flex flex-col gap-1'>
               <label htmlFor=''>Title</label>
               <input
+                required
                 type='text'
                 name='title'
                 id='title'
@@ -67,6 +68,7 @@ const AddReminder = () => {
             <div className='flex flex-col gap-1'>
               <label htmlFor=''>Date</label>
               <input
+                required
                 type='date'
                 name='date'
                 id='date'
@@ -80,6 +82,7 @@ const AddReminder = () => {
               <label htmlFor=''>Time</label>
               <div className='flex justify-center items-center gap-4'>
                 <input
+                  required
                   type='number'
                   name='hour'
                   id='hour'
@@ -92,6 +95,7 @@ const AddReminder = () => {
                 />
                 :
                 <input
+                  required
                   type='number'
                   name='minute'
                   id='minute'
@@ -108,6 +112,7 @@ const AddReminder = () => {
             <div className='flex flex-col gap-1'>
               <label htmlFor=''>Description</label>
               <input
+                required
                 type='text'
                 name='desc'
                 id='desc'
