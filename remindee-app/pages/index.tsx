@@ -66,7 +66,7 @@ export default function Home() {
     return (
       <div
         className={cx(
-          "container w-[480px] h-full mx-auto flex justify-center bg-[#0D1F51] absolute overflow-hidden",
+          "container w-[480px] h-full mx-auto flex justify-center bg-[#0D1F51] absolute overflow-hidden z-50",
           {
             "slide-open": isShow,
             "slide-close": !isShow,
