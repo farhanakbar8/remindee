@@ -131,7 +131,7 @@ const EditReminder = () => {
                 type='submit'
                 className=' bg-[#408CFC] rounded-3xl text-white py-3 font-[T-Medium] w-[207px] m-auto'
               >
-                Create
+                Update
               </button>
             </div>
           </form>
