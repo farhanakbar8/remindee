@@ -22,7 +22,7 @@ const editProfile = () => {
         <div className='mt-16 mx-7 font-[T-Regular]'>
           <form action='' className='flex flex-col gap-5'>
             <div className='flex flex-col gap-1'>
-              <label htmlFor=''>First Name</label>
+              <label htmlFor=''>Name</label>
               <input
                 type='text'
                 name=''
@@ -31,25 +31,6 @@ const editProfile = () => {
               />
             </div>
 
-            <div className='flex flex-col gap-1'>
-              <label htmlFor=''>Last Name</label>
-              <input
-                type='text'
-                name=''
-                id=''
-                className='px-1 text-sm h-[30px] rounded-lg focus:outline-[#408CFC]'
-              />
-            </div>
-
-            <div className='flex flex-col gap-1'>
-              <label htmlFor=''>Email</label>
-              <input
-                type='email'
-                name=''
-                id=''
-                className='px-1 text-sm h-[30px] rounded-lg focus:outline-[#408CFC]'
-              />
-            </div>
             <div className='flex flex-col justify-center mt-6'>
               <button
                 type='submit'

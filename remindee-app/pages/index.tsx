@@ -2,6 +2,7 @@ import { HiMenuAlt4 } from "react-icons/hi";
 import { IoCloseCircle, IoAddCircle } from "react-icons/io5";
 import { IoIosArrowBack } from "react-icons/io";
 import { HiOutlineLogout } from "react-icons/hi";
+import { BiUser } from "react-icons/bi";
 import TaskForm from "../components/TaskForm";
 import ReminderForm from "../components/ReminderForm";
 import React, { SyntheticEvent, useEffect, useState } from "react";
@@ -18,9 +19,12 @@ export default function Home() {
   const [profile, setProfile] = useState(null);
   const [profpic, setProfpic] = useState(null);
   const [isHovering, setIsHovered] = useState(false);
+  const [isHovering2, setIsHovered2] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
   const onMouseEnter = () => setIsHovered(true);
   const onMouseLeave = () => setIsHovered(false);
+  const onMouseEnter2 = () => setIsHovered2(true);
+  const onMouseLeave2 = () => setIsHovered2(false);
 
   const router = useRouter();
 
@@ -57,7 +61,7 @@ export default function Home() {
     return (
       <div
         className={cx(
-          "container w-[480px] min-h-screen mx-auto flex justify-center bg-[#0D1F51] absolute overflow-hidden",
+          "container w-[480px] h-full mx-auto flex justify-center bg-[#0D1F51] absolute overflow-hidden",
           {
             "slide-open": isShow,
             "slide-close": !isShow,
@@ -79,32 +83,58 @@ export default function Home() {
           {/* Header */}
           {/* User Name */}
           {isLogin ? (
-            <div className='mt-16 text-white font-[T-Medium] font-bold flex items-center gap-4'>
-              <div className='w-[105px] h-[105px] relative border-[3px] border-[#3D4D7A] rounded-full p-1 relative'>
-                {profpic ? (
-                  <img
-                    src={profpic}
-                    width={120}
-                    height={120}
-                    className='rounded-full'
-                  />
-                ) : (
-                  <img src='' alt='' />
-                )}
+            <div className='mt-16 text-white font-[T-Medium] font-bold flex-row items-center gap-4'>
+              <div className='flex items-center gap-6'>
+                <div className='w-[105px] h-[105px] relative border-[3px] border-[#3D4D7A] rounded-full p-1 relative'>
+                  {profpic ? (
+                    <img
+                      src={profpic}
+                      width={120}
+                      height={120}
+                      className='rounded-full'
+                    />
+                  ) : (
+                    <img src='' alt='' />
+                  )}
+                </div>
+                <div className='flex flex-col text-2xl'>
+                  {arrName &&
+                    arrName.map((name) => {
+                      return <p key={name.id}>{name}</p>;
+                    })}
+                </div>
               </div>
-              <div className='flex flex-col text-2xl'>
-                {arrName &&
-                  arrName.map((name) => {
-                    return <p key={name.id}>{name}</p>;
-                  })}
+              <div className='mt-10'>
+                <Link href='/editprofile'>
+                  <button
+                    onMouseEnter={onMouseEnter}
+                    onMouseLeave={onMouseLeave}
+                  >
+                    {isHovering ? (
+                      <div className='py-1 px-3 flex items-center gap-2 bg-white rounded-xl transition-width duration-100 drop-shadow-lg'>
+                        <BiUser className='text-slate-400 text-5xl' />
+                        <p className='text-slate-400 font-bold font-[T-Medium] transition-opacity opacity-100'>
+                          Edit Profile
+                        </p>
+                      </div>
+                    ) : (
+                      <div className='py-1 px-1 flex items-center gap-2 rounded-xl transition-width duration-200'>
+                        <BiUser className='text-white text-5xl' />
+                        <p className='text-white font-bold font-[T-Medium] transition-opacity opacity-0'>
+                          Edit Profile
+                        </p>
+                      </div>
+                    )}
+                  </button>
+                </Link>
               </div>
-              <div className='flex mt-40 justify-start items-center'>
+              <div className='mt-80'>
                 <button
-                  onMouseEnter={onMouseEnter}
-                  onMouseLeave={onMouseLeave}
+                  onMouseEnter={onMouseEnter2}
+                  onMouseLeave={onMouseLeave2}
                   onClick={handleLogout}
                 >
-                  {isHovering ? (
+                  {isHovering2 ? (
                     <div className='py-1 px-3 flex items-center gap-2 bg-red-500 rounded-xl transition-width duration-100 drop-shadow-lg'>
                       <HiOutlineLogout className='text-white text-5xl' />
                       <p className='text-white font-bold font-[T-Medium] transition-opacity opacity-100'>
@@ -162,7 +192,7 @@ export default function Home() {
   }
 
   return (
-    <div className='container w-[480px] mx-auto flex justify-center overflow-hidden relative'>
+    <div className='container w-[480px] h-full mx-auto flex justify-center overflow-hidden relative'>
       {profilePage()}
       <div className='w-full bg-[#F8FAFE] px-5 min-h-screen'>
         {/* Header - Navbar */}

@@ -62,7 +62,7 @@ const LoginPage = () => {
               id='user_email'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className='border-b-[1.5px] focus:outline-0 mt-3'
+              className='border-b-[1.5px] focus:outline-0 mt-3 font-semibold'
             />
             <label htmlFor='' className='text-sm mt-5 text-[#9C9AA8]'>
               Password
@@ -74,7 +74,7 @@ const LoginPage = () => {
               type='password'
               name='password'
               id='user_pass'
-              className='border-b-[1.5px] focus:outline-0 mt-3'
+              className='border-b-[1.5px] focus:outline-0 mt-3 font-semibold'
             />
 
             {isLogin ? "" : <h1>Username or Password incorrect</h1>}
