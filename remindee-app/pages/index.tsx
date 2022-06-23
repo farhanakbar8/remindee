@@ -18,6 +18,7 @@ export default function Home() {
   const [profile, setProfile] = useState(null);
   const [profpic, setProfpic] = useState(null);
   const [isHovering, setIsHovered] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
   const onMouseEnter = () => setIsHovered(true);
   const onMouseLeave = () => setIsHovered(false);
 
@@ -33,13 +34,11 @@ export default function Home() {
         setReminder(res.data);
       });
       api.get(`/profile?id=${userId}`).then((res) => {
-        setProfile(res.data["name"]);
-        setProfpic(res.data["image"]);
+        setProfile(res?.data["name"]);
+        setProfpic(res?.data["image"]);
+        setIsLogin(true);
       });
     }
-    // else {
-    //   router.push("/login");
-    // }
   }, []);
 
   const handleLogout = async (event: SyntheticEvent) => {
@@ -51,10 +50,6 @@ export default function Home() {
   var arrName = [];
   if (profile) {
     arrName = profile.split(" ");
-  }
-
-  function isLogin() {
-    return "userId" in localStorage;
   }
 
   // Profile Page
@@ -83,7 +78,7 @@ export default function Home() {
           </div>
           {/* Header */}
           {/* User Name */}
-          {!isLogin ? (
+          {isLogin ? (
             <div className='mt-16 text-white font-[T-Medium] font-bold flex items-center gap-4'>
               <div className='w-[105px] h-[105px] relative border-[3px] border-[#3D4D7A] rounded-full p-1 relative'>
                 {profpic ? (
