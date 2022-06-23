@@ -13,6 +13,9 @@ type TaskFormProps = {
 const TaskForm = ({ taskList }: TaskFormProps) => {
   const [isChecked, setIsChecked] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
+  const [isHovering, setIsHovered] = useState(false);
+  const onMouseEnter = () => setIsHovered(true);
+  const onMouseLeave = () => setIsClicked(false);
 
   const router = useRouter();
 
@@ -35,28 +38,54 @@ const TaskForm = ({ taskList }: TaskFormProps) => {
     return (
       <div
         className={cx(
-          "bg-white rounded-2xl mb-8 relative text-xs flex flex-col items-center gap-3 p-2 font-[T-Regular]",
+          "bg-white rounded-2xl mt-2 mb-8 relative text-xs flex flex-col items-center gap-3 p-2 font-[T-Regular] font-semibold drop-shadow-lg",
           {
             hidden: !isClicked,
             block: isClicked,
           }
         )}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
       >
-        <div className='h-[25px] w-full text-center'>
-          {taskList.description}
-        </div>
-        <button
-          onClick={handleEdit}
-          className='hover:bg-[#007FFF] hover:text-white active:bg-[#007FFF] active:text-white w-[60px] h-[25px] rounded-lg text-[#007FFF]'
-        >
-          Edit
-        </button>
-        <button
-          onClick={handleDelete}
-          className='hover:bg-[#FF002E] hover:text-white active:bg-[#FF002E] active:text-white w-[60px] h-[25px] rounded-lg text-[#FF002E]'
-        >
-          Delete
-        </button>
+        {isHovering ? (
+          <div className='flex-row'>
+            <div className='h-[25px] w-full text-center'>
+              {taskList.description}
+            </div>
+
+            <button
+              onClick={handleEdit}
+              className='hover:bg-[#007FFF] hover:text-white active:bg-[#007FFF] active:text-white w-[60px] h-[25px] rounded-lg text-[#007FFF] font-semibold'
+            >
+              Edit
+            </button>
+            <button
+              onClick={handleDelete}
+              className='hover:bg-[#FF002E] hover:text-white active:bg-[#FF002E] active:text-white w-[60px] h-[25px] rounded-lg text-[#FF002E] font-semibold'
+            >
+              Delete
+            </button>
+          </div>
+        ) : (
+          <div className='flex-row'>
+            <div className='h-[25px] w-full text-center'>
+              {taskList.description}
+            </div>
+
+            <button
+              onClick={handleEdit}
+              className='hover:bg-[#007FFF] hover:text-white active:bg-[#007FFF] active:text-white w-[60px] h-[25px] rounded-lg text-[#007FFF] font-semibold'
+            >
+              Edit
+            </button>
+            <button
+              onClick={handleDelete}
+              className='hover:bg-[#FF002E] hover:text-white active:bg-[#FF002E] active:text-white w-[60px] h-[25px] rounded-lg text-[#FF002E] font-semibold'
+            >
+              Delete
+            </button>
+          </div>
+        )}
       </div>
     );
   }
