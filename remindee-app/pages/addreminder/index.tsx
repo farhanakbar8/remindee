@@ -79,7 +79,9 @@ const AddReminder = () => {
             </div>
 
             <div className='flex flex-col gap-1'>
-              <label htmlFor=''>Time</label>
+              <label htmlFor=''>
+                Time <span className='text-[9.5px]'>(24 hour format)</span>
+              </label>
               <div className='flex justify-center items-center gap-4'>
                 <input
                   required

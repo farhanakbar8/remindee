@@ -1,6 +1,6 @@
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { BsCalendar2Week } from "react-icons/bs";
-import React, { SyntheticEvent, useState } from "react";
+import React, { SyntheticEvent, useState, useEffect } from "react";
 import cx from "classnames";
 import { useRouter } from "next/router";
 import api from "../../client/api";
@@ -31,6 +31,47 @@ const ReminderForm = ({ reminder }: ReminderFormProps) => {
     event.preventDefault();
     router.push(`/${reminder.id}/editReminder`);
   };
+
+  function notifyMe() {
+    let title = "Reminder";
+    let options = {
+      body: countDate(),
+    };
+    let n = new Notification(title, options);
+    console.log(n);
+
+    Notification.requestPermission()
+      .then(function (result) {
+        console.log(result); //granted || denied
+        if (Notification.permission == "granted") {
+          return "Access Granted";
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function countDate() {
+    const arrUserDate = reminder.date.split("-").map(Number);
+
+    const yearNow = new Date().getFullYear();
+    const monthNow = new Date().getMonth() + 1;
+    const dateNow = new Date().getDate();
+
+    const arrNowDate = [];
+    arrNowDate.push(yearNow);
+    arrNowDate.push(monthNow);
+    arrNowDate.push(dateNow);
+
+    const count = arrUserDate.map(function (item, index) {
+      return item - arrNowDate[index];
+    });
+
+    return count[2] < 0
+      ? "Overdue"
+      : `${count[0]} year(s) ${count[1]} month(s) ${count[2]} day(s) left`;
+  }
 
   function dropDownBox() {
     return (
@@ -95,7 +136,11 @@ const ReminderForm = ({ reminder }: ReminderFormProps) => {
     >
       <div className='flex justify-between items-center h-[77px]'>
         <div className='flex gap-3'>
-          <button>
+          <button
+            onClick={() => {
+              notifyMe();
+            }}
+          >
             <BsCalendar2Week className='text-xl text-[#BB1FC2]'></BsCalendar2Week>
           </button>
           <div className='font-[T-Regular]'>
@@ -119,6 +164,7 @@ const ReminderForm = ({ reminder }: ReminderFormProps) => {
         </div>
       </div>
       {dropDownBox()}
+      {/* {countDate()} */}
     </div>
   );
 };
