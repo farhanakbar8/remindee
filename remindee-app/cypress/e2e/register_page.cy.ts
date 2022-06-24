@@ -1,9 +1,9 @@
 describe("Registering", () => {
   beforeEach(() => {
     cy.request("POST", "http://localhost:3000/api/authentication/register", {
-      email: "test2@mail.com",
+      email: "test@mail.com",
       password: "12345",
-      name: "mail2",
+      name: "mail",
     });
   });
 
