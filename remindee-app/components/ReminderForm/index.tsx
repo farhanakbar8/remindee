@@ -1,6 +1,6 @@
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { BsCalendar2Week } from "react-icons/bs";
-import React, { SyntheticEvent, useState, useEffect } from "react";
+import React, { SyntheticEvent, useState } from "react";
 import cx from "classnames";
 import { useRouter } from "next/router";
 import api from "../../client/api";
@@ -68,7 +68,12 @@ const ReminderForm = ({ reminder }: ReminderFormProps) => {
       return item - arrNowDate[index];
     });
 
-    return count[2] < 0
+    console.log(count[0], count[1], count[2]);
+    console.log(count[0] < 0);
+    console.log(count[1] < 0);
+    console.log(count[2] < 0);
+
+    return count[0] < 0 && count[1] < 0 && count[2] < 0
       ? "Overdue"
       : `${count[0]} year(s) ${count[1]} month(s) ${count[2]} day(s) left`;
   }
